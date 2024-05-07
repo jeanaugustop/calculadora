@@ -54,11 +54,33 @@ function formsCalculo(){
                 echo "Operação inválida!";
         }
 
+    // Adiciona a operação ao histórico com símbolos correspondentes
+    $operacaoSimbolo = '';
+    switch($op) {
+        case "soma":
+            $operacaoSimbolo = '+';
+            break;
+        case "subtracao":
+            $operacaoSimbolo = '-';
+            break;
+        case "multiplicacao":
+            $operacaoSimbolo = 'x';
+            break;
+        case "divisao":
+            $operacaoSimbolo = '/';
+            break;
+        case "potencia":
+            $operacaoSimbolo = '^';
+            break;
+        case "fatorial":
+            $operacaoSimbolo = '!';
+            break;
+    }
         // Adiciona a operação ao histórico
         $historico = array(
             "num1" => $a,
             "num2" => $b,
-            "operacao" => $op,
+            "operacao" => $operacaoSimbolo,
             "resultado" => $result
         );
         $_SESSION['historico'][] = $historico;
@@ -75,7 +97,7 @@ if(isset($_POST['limpar'])) {
 }
 
     
-    // Exibir o histórico ou mensagem de nenhum cálculo
+    // Exibir o histórico
     if(isset($_SESSION['historico']) && count($_SESSION['historico']) > 0) {
         echo '<h2>Histórico</h2>';
         echo '<ul>';
