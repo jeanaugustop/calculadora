@@ -15,8 +15,28 @@ function formsCalculo(){
     echo '<option value="fatorial">!</option>';
     echo '</select>';
     echo 'Segundo numero: <input name="num2" type="text" />';
-    echo '<input type="submit" value="Calcular" />';
+    echo '<br><input type="submit" value="Calcular" />';
     echo '</form>';
+
+    // Botão para salvar na memória
+    echo '<form action="" method="post">';
+    echo '<input type="submit" name="salvar_memoria" value="Salvar na Memória" />';
+    echo '</form>';
+
+    // Botão para recuperar da memória
+    echo '<form action="" method="post">';
+    echo '<input type="submit" name="recuperar_memoria" value="Recuperar da Memória" />';
+    echo '</form>';
+
+    // Lógica para salvar na memória
+    if(isset($_POST['salvar_memoria'])) {
+        $_SESSION['memoria'] = $_SESSION;
+    }
+
+    // Lógica para recuperar da memória
+    if(isset($_POST['recuperar_memoria']) && isset($_SESSION['memoria'])) {
+        $_SESSION = $_SESSION['memoria'];
+    }
 
     if(isset($_GET["num1"]) && isset($_GET["num2"]) && isset($_GET["operacao"])) {
         $a = $_GET["num1"];
@@ -54,28 +74,28 @@ function formsCalculo(){
                 echo "Operação inválida!";
         }
 
-    // Adiciona a operação ao histórico com símbolos correspondentes
-    $operacaoSimbolo = '';
-    switch($op) {
-        case "soma":
-            $operacaoSimbolo = '+';
-            break;
-        case "subtracao":
-            $operacaoSimbolo = '-';
-            break;
-        case "multiplicacao":
-            $operacaoSimbolo = 'x';
-            break;
-        case "divisao":
-            $operacaoSimbolo = '/';
-            break;
-        case "potencia":
-            $operacaoSimbolo = '^';
-            break;
-        case "fatorial":
-            $operacaoSimbolo = '!';
-            break;
-    }
+        // Adiciona a operação ao histórico com símbolos correspondentes
+        $operacaoSimbolo = '';
+        switch($op) {
+            case "soma":
+                $operacaoSimbolo = '+';
+                break;
+            case "subtracao":
+                $operacaoSimbolo = '-';
+                break;
+            case "multiplicacao":
+                $operacaoSimbolo = 'x';
+                break;
+            case "divisao":
+                $operacaoSimbolo = '/';
+                break;
+            case "potencia":
+                $operacaoSimbolo = '^';
+                break;
+            case "fatorial":
+                $operacaoSimbolo = '!';
+                break;
+        }
         // Adiciona a operação ao histórico
         $historico = array(
             "num1" => $a,
@@ -92,11 +112,10 @@ function formsCalculo(){
     echo '</form>';
 
     // Lógica para limpar o histórico, incluindo o último cálculo
-if(isset($_POST['limpar'])) {
-    $_SESSION['historico'] = array(); // Limpa todo o histórico
-}
+    if(isset($_POST['limpar'])) {
+        $_SESSION['historico'] = array(); // Limpa todo o histórico
+    }
 
-    
     // Exibir o histórico
     if(isset($_SESSION['historico']) && count($_SESSION['historico']) > 0) {
         echo '<h2>Histórico</h2>';
@@ -109,24 +128,6 @@ if(isset($_POST['limpar'])) {
         echo '</ul>';
     } else {
         echo '<p>Nenhum cálculo realizado ainda.</p>';
-    }
-}
-
-// Função para adicionar na memoria
-function salvarMemoria($a, $b, $op) {
-    $_SESSION['memoria'] = array(
-        "num1" => $a,
-        "num2" => $b,
-        "operacao" => $op
-    );
-}
-
-// Função para recuperar numeros memoria
-function recuperarMemoria() {
-    if(isset($_SESSION['memoria'])) {
-        return $_SESSION['memoria'];
-    } else {
-        return "Nenhum valor salvo na memória!";
     }
 }
 

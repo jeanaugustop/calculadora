@@ -9,6 +9,7 @@
     <?php
     require "comandos.php";
     
+        echo "<h1>Calculadora PHP</h1>";
         formsCalculo();
 
         
