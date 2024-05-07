@@ -48,7 +48,7 @@ function formsCalculo(){
                 break;
             case "fatorial":
                 $result = fatorial($a);
-                echo "$a ! $b = $result";
+                echo "$a ! = $result";
                 break;
             default:
                 echo "Operação inválida!";
@@ -64,14 +64,29 @@ function formsCalculo(){
         $_SESSION['historico'][] = $historico;
     }
 
-    // Botão para limpar o histórico
+    // Botão para limpar o histórico, incluindo o último cálculo
     echo '<form action="" method="post">';
     echo '<input type="submit" name="limpar" value="Limpar Histórico" />';
     echo '</form>';
 
-    // Lógica para limpar o histórico
-    if(isset($_POST['limpar'])) {
-        unset($_SESSION['historico']);
+    // Lógica para limpar o histórico, incluindo o último cálculo
+if(isset($_POST['limpar'])) {
+    $_SESSION['historico'] = array(); // Limpa todo o histórico
+}
+
+    
+    // Exibir o histórico ou mensagem de nenhum cálculo
+    if(isset($_SESSION['historico']) && count($_SESSION['historico']) > 0) {
+        echo '<h2>Histórico</h2>';
+        echo '<ul>';
+        foreach($_SESSION['historico'] as $item) {
+            echo '<li>';
+            echo "{$item['num1']} {$item['operacao']} {$item['num2']} = {$item['resultado']}";
+            echo '</li>';
+        }
+        echo '</ul>';
+    } else {
+        echo '<p>Nenhum cálculo realizado ainda.</p>';
     }
 }
 
