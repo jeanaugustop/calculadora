@@ -1,0 +1,67 @@
+/* Reset CSS */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos da calculadora */
+.calculator {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos do formulário */
+form {
+    display: flex;
+    flex-direction:initial; /* Alterado para empilhar os elementos verticalmente */
+    align-items:baseline; /* Centraliza os elementos horizontalmente */
+}
+
+/* Estilos dos inputs e selects */
+input[type="text"],
+select {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilos do botão de submit */
+input[type="submit"] {
+    margin-top: 10px; /* Adicionado espaçamento acima do botão */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos do histórico */
+.history {
+    margin-top: 20px;
+    align-items: center;
+}
+
+.history h2 {
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.history ul {
+    list-style-type: none;
+    padding: 0;
+    align-items: center;
+}
+
+.history li {
+    margin-bottom: 5px;
+    align-items: center;
+}
